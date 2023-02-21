@@ -1,8 +1,8 @@
 
 from PyQt6.QtCore import Qt, QAbstractTableModel, QModelIndex
-from PyQt6.QtGui import QColor
 from queryService import *
 
+# NOT IN USE
 class CustomTableModel(QAbstractTableModel):
     def __init__(self, data, headers):
         super(CustomTableModel, self).__init__()
@@ -29,8 +29,8 @@ class CustomTableModel(QAbstractTableModel):
         if role == Qt.ItemDataRole.DisplayRole:
             if orientation == Qt.Orientation.Horizontal:
                 return self.headerLabels[section]
-            if orientation == Qt.Orientation.Vertical:
-                return "a"
+            # if orientation == Qt.Orientation.Vertical:
+            #     return self._data[0]
 
     # def data(self, index, role=Qt.ItemDataRole.DisplayRole):
     #     column = index.column()

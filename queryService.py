@@ -9,12 +9,18 @@ class QueryService():
         queryStatement = f"SELECT * FROM {table}"
         cursor.execute(queryStatement)
         rows = cursor.fetchall()
-
-        headers = [i[0] for i in cursor.description]
-
         cursor.close()
 
         return rows
+
+    def getTables():
+        cursor = QueryService.cursor()
+        queryStatement = f"SELECT table_name FROM information_schema.tables WHERE table_schema = 'public'"
+        cursor.execute(queryStatement)
+        tables = cursor.fetchall()
+        cursor.close()
+
+        return tables
 
     def getHeaders(table):
         cursor = QueryService.cursor()
