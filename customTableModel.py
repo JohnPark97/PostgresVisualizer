@@ -29,23 +29,3 @@ class CustomTableModel(QAbstractTableModel):
         if role == Qt.ItemDataRole.DisplayRole:
             if orientation == Qt.Orientation.Horizontal:
                 return self.headerLabels[section]
-            # if orientation == Qt.Orientation.Vertical:
-            #     return self._data[0]
-
-    # def data(self, index, role=Qt.ItemDataRole.DisplayRole):
-    #     column = index.column()
-    #     row = index.row()
-
-    #     # if role == Qt.ItemDataRole.DisplayRole:
-    #     #     if column == 0:
-    #     #         date = self.input_dates[row].toPython()
-    #     #         return str(date)[:-3]
-    #     #     elif column == 1:
-    #     #         magnitude = self.input_magnitudes[row]
-    #     #         return f"{magnitude:.2f}"
-    #     if role == Qt.ItemDataRole.BackgroundRole:
-    #         return QColor(Qt.GlobalColor.white)
-    #     elif role == Qt.ItemDataRole.TextAlignmentRole:
-    #         return Qt.AlignmentFlag.AlignRight
-
-    #     return None
