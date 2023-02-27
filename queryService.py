@@ -34,8 +34,12 @@ class QueryService():
 
         return headers
 
-    def insert():
-        pass
+    def insert(table, values):
+        cursor = QueryService.cursor()
+        queryStatement = f"INSERT INTO {table} VALUES ({values})"
+        cursor.execute(queryStatement)
+
+        cursor.close()
 
     def update():
         pass
