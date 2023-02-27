@@ -1,20 +1,27 @@
 from PyQt6.QtWidgets import QDialog, QVBoxLayout, QLineEdit, QHBoxLayout, QLabel, QDialogButtonBox
+from queryService import QueryService
 
 class CustomDialog(QDialog):
     def __init__(self, headers, type, parent=None):
         super(QDialog, self).__init__(parent)
 
+        self.line_edits = []
         if type == "Add Row":
             self.setWindowTitle(type)
 
             # Create layout and add line edits to it
             v_layout = QVBoxLayout()
             h_layout = QHBoxLayout()
-            for header in headers:
+
+            # Take out the id section of the headers
+            self.headers = headers[1:]
+
+            for header in self.headers:
                 label = QLabel(header)
                 line_edit = QLineEdit()
                 h_layout.addWidget(label)
                 h_layout.addWidget(line_edit)
+                self.line_edits.append(line_edit)
 
             # Buttons
             buttons = QDialogButtonBox(QDialogButtonBox.StandardButton.Ok | QDialogButtonBox.StandardButton.Cancel)
@@ -30,6 +37,10 @@ class CustomDialog(QDialog):
             # Make the dialog visible
             self.exec()
 
-    def add_row_okay(self):
-        # TODO: implementation
+    def add_row_okay(self): 
+        values_to_be_added = self.get_dialog_values()
+        QueryService.insert('accounts', self.headers, values_to_be_added)
         self.close()
+
+    def get_dialog_values(self):
+        return [line_edit.text() for line_edit in self.line_edits]

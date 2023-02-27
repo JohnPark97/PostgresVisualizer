@@ -1,6 +1,10 @@
 from connection import ConnectionService
+from common import comma_join
 
 class QueryService():
+    def connection():
+        return ConnectionService.connect()
+    
     def cursor(): 
         return ConnectionService.connect().cursor()
 
@@ -34,15 +38,21 @@ class QueryService():
 
         return headers
 
-    def insert(table, values):
-        cursor = QueryService.cursor()
-        queryStatement = f"INSERT INTO {table} VALUES ({values})"
-        cursor.execute(queryStatement)
+    def insert(table, columns, values):
+        conn = QueryService.connection()
+        cursor = conn.cursor()
+        queryStatement = f"INSERT INTO {table} ({comma_join(columns)}) VALUES ({generate_variable_marks(columns)})"
+        cursor.execute(queryStatement, tuple(values))
+        conn.commit()
 
         cursor.close()
+        conn.close()
 
     def update():
         pass
 
     def delete():
         pass
+
+def generate_variable_marks(cols):
+    return ', '.join(['%s' for i in range(len(cols))])
