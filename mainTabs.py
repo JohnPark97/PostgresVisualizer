@@ -14,3 +14,7 @@ class MainTabs(QTabWidget):
             data = QueryService.get(table)
             headers = QueryService.getHeaders(table)
             self.addTab(CustomTableWidget(data, headers), table)
+
+    def currentTable(self):
+        # TODO: make this changeable when the tab changes
+        return self.currentWidget()

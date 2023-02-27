@@ -16,4 +16,13 @@ class CustomTableWidget(QTableWidget):
             header.setSectionResizeMode(i, QHeaderView.ResizeMode.ResizeToContents)
         header.setSectionResizeMode(0, QHeaderView.ResizeMode.Fixed)
 
+    def getHeaderNames(self):
+        num_cols = self.columnCount()
+        header_names = []
+        for col in range(num_cols):
+            header_item = self.horizontalHeaderItem(col)
+            header_name = header_item.text()
+            header_names.append(header_name)
+
+        return header_names
 

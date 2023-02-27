@@ -1,6 +1,7 @@
 
-from PyQt6.QtWidgets import QMainWindow, QVBoxLayout, QTabWidget, QTableView
+from PyQt6.QtWidgets import QMainWindow
 from mainTabs import *
+from toolBar import ToolBar
 
 class MainWindow(QMainWindow):
     def __init__(self, *args, **kwargs):
@@ -12,3 +13,6 @@ class MainWindow(QMainWindow):
         self.setMinimumSize(width, height)
         self._tabWidget = MainTabs(self)
         self.setCentralWidget(self._tabWidget)
+
+        self.toolbar = ToolBar(self._tabWidget)
+        self.addToolBar(self.toolbar)
