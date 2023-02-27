@@ -2,7 +2,8 @@ from PyQt6.QtWidgets import QTableView
 from customTableModel import *
 from queryService import QueryService
 
-class Table(QTableView):
+# NOT IN USE
+class CustomTable(QTableView):
     def __init__(self, table, *args, **kwargs):
         super(QTableView, self).__init__(*args, **kwargs)
 
@@ -15,6 +16,4 @@ class Table(QTableView):
 
 
         self.model = CustomTableModel(rows, headers)
-        # self.model.setHorizontalHeaderLabels(headers)
-        # self.model.setHeaderData(1, Qt.Horizontal, 'Date')
         self.setModel(self.model)
