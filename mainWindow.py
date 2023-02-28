@@ -11,8 +11,9 @@ class MainWindow(QMainWindow):
         width = 800
         height = 500
         self.setMinimumSize(width, height)
-        self._tabWidget = MainTabs(self)
-        self.setCentralWidget(self._tabWidget)
 
-        self.toolbar = ToolBar(self._tabWidget)
+        self.toolbar = ToolBar()
         self.addToolBar(self.toolbar)
+
+        self._tabWidget = MainTabs(self.toolbar)
+        self.setCentralWidget(self._tabWidget)

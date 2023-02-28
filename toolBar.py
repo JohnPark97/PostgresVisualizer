@@ -6,18 +6,17 @@ from customDialog import *
 ACTIONS = ['Add Row', 'Commit Changes']
 
 class ToolBar(QToolBar):
-    def __init__(self, mainTab):
-        super(QToolBar, self).__init__(mainTab)
-        self.currentTable = mainTab.currentTable()
+    def __init__(self):
+        super(QToolBar, self).__init__()
 
         add_row_action = QAction('Add Row', self)
         add_row_action.setStatusTip('Add a row in database')
-        add_row_action.triggered.connect(self.addRow)
+        add_row_action.triggered.connect(self.prompt_add_row)
 
         self.addAction(add_row_action)
         
-    def addRow(self):
-        headers = self.currentTable.getHeaderNames()
-        messageBox = CustomDialog(headers, "Add Row")
+    def prompt_add_row(self):
+        CustomDialog(self.currentTable, "Add Row")
 
-        # QueryService.insert('accounts', [asdf])
+    def set_curr_table(self, curr_widget):
+        self.currentTable = curr_widget
