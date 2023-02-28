@@ -1,5 +1,5 @@
 import psycopg2
-from queryService import *
+from services.queryService import *
 
 
 class ConnectionService():

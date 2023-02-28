@@ -1,4 +1,4 @@
-from connection import ConnectionService
+from services.connection_service import ConnectionService
 from common import comma_join
 
 class QueryService():
