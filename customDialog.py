@@ -6,6 +6,7 @@ class CustomDialog(QDialog):
     def __init__(self, currentTable: CustomTableWidget, type, parent=None):
         super(QDialog, self).__init__(parent)
         self.currentTable = currentTable
+        self.current_table_name = currentTable.table_name
         self.headers = self.currentTable.getHeaderNames()
 
         self.line_edits = []
@@ -43,7 +44,7 @@ class CustomDialog(QDialog):
     def add_row_okay(self): 
         values_to_be_added = self.get_dialog_values()
         # Insert to DB
-        inserted_id = QueryService.insert('accounts', self.headers_no_id, values_to_be_added, self.headers[0])
+        inserted_id = QueryService.insert(self.current_table_name, self.headers_no_id, values_to_be_added, self.headers[0])
 
         # Inserted data
         inserted_data = [inserted_id] + values_to_be_added

@@ -1,8 +1,11 @@
 from PyQt6.QtWidgets import QTableWidget, QTableWidgetItem, QHeaderView
+from PyQt6.QtGui import QPalette, QColor
+from PyQt6.QtCore import Qt
 
 class CustomTableWidget(QTableWidget):
-    def __init__(self, data, headers):
+    def __init__(self, data, headers, table_name):
         super(QTableWidget, self).__init__()
+        self.table_name = table_name
         self.setColumnCount(len(headers))
         self.setHorizontalHeaderLabels(headers)
 
@@ -15,6 +18,16 @@ class CustomTableWidget(QTableWidget):
         # set initial rows
         for row in data:
             self.add_row(row)
+        
+        # Set selection color to light blue
+        palette = self.palette()
+        palette.setColor(QPalette.ColorRole.Highlight, QColor(220, 220, 255))
+        palette.setColor(QPalette.ColorRole.HighlightedText, QColor(Qt.GlobalColor.black))
+
+        self.setPalette(palette)
+
+        # Select the whole row when a single cell is selected
+        self.setSelectionBehavior(QTableWidget.SelectionBehavior.SelectRows)
 
     def getHeaderNames(self):
         num_cols = self.columnCount()
