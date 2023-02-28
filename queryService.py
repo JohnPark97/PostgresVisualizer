@@ -38,15 +38,21 @@ class QueryService():
 
         return headers
 
-    def insert(table, columns, values):
+    def insert(table, columns, values, id_col):
         conn = QueryService.connection()
         cursor = conn.cursor()
-        queryStatement = f"INSERT INTO {table} ({comma_join(columns)}) VALUES ({generate_variable_marks(columns)})"
+        queryStatement = f"INSERT INTO {table} ({comma_join(columns)}) VALUES ({generate_variable_marks(columns)}) RETURNING {id_col}"
         cursor.execute(queryStatement, tuple(values))
+
+        inserted_id = cursor.fetchone()[0]
+        print(f"Inserted id: {inserted_id} values: {tuple(values)}")
+
         conn.commit()
 
         cursor.close()
         conn.close()
+
+        return inserted_id
 
     def update():
         pass

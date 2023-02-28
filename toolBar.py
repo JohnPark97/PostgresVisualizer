@@ -12,12 +12,11 @@ class ToolBar(QToolBar):
 
         add_row_action = QAction('Add Row', self)
         add_row_action.setStatusTip('Add a row in database')
-        add_row_action.triggered.connect(self.addRow)
+        add_row_action.triggered.connect(self.prompt_add_row)
 
         self.addAction(add_row_action)
         
-    def addRow(self):
-        headers = self.currentTable.getHeaderNames()
-        messageBox = CustomDialog(headers, "Add Row")
+    def prompt_add_row(self):
+        CustomDialog(self.currentTable, "Add Row")
 
         # QueryService.insert('accounts', [asdf])

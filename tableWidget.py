@@ -5,16 +5,16 @@ class CustomTableWidget(QTableWidget):
         super(QTableWidget, self).__init__()
         self.setColumnCount(len(headers))
         self.setHorizontalHeaderLabels(headers)
-        self.setRowCount(len(data))
-        for i in range(len(data)):
-            for j in range(len(headers)):
-                self.setItem(i, j, QTableWidgetItem(str(data[i][j])))
 
         # resize cell by the header length
         header = self.horizontalHeader()
         for i in range(len(header)):
             header.setSectionResizeMode(i, QHeaderView.ResizeMode.ResizeToContents)
         header.setSectionResizeMode(0, QHeaderView.ResizeMode.Fixed)
+
+        # set initial rows
+        for row in data:
+            self.add_row(row)
 
     def getHeaderNames(self):
         num_cols = self.columnCount()
@@ -26,3 +26,11 @@ class CustomTableWidget(QTableWidget):
 
         return header_names
 
+    def add_row(self, row):
+        row_count = self.rowCount()
+        col_count = self.columnCount()
+        self.insertRow(row_count)
+
+        for i in range(col_count):
+            item = QTableWidgetItem(str(row[i]))
+            self.setItem(row_count, i, item)
