@@ -2,7 +2,7 @@ from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QPainter, QColor
 from PyQt6.QtWidgets import QTabBar
 
-
+# NOT IN USE
 class MyTabBar(QTabBar):
     def __init__(self, parent=None):
         super().__init__(parent)
