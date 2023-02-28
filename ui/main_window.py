@@ -1,7 +1,7 @@
 
 from PyQt6.QtWidgets import QMainWindow
-from mainTabs import *
-from toolBar import ToolBar
+from ui.main_tabs import *
+from ui.tool_bar import ToolBar
 
 class MainWindow(QMainWindow):
     def __init__(self, *args, **kwargs):

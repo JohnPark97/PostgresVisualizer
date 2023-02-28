@@ -1,8 +1,8 @@
 from PyQt6.QtWidgets import QTabWidget
-from queryService import *
+from services.query_service import *
 from common import *
-from tableWidget import CustomTableWidget
-from toolBar import ToolBar
+from ui.table_widget import CustomTableWidget
+from ui.tool_bar import ToolBar
 
 
 class MainTabs(QTabWidget):

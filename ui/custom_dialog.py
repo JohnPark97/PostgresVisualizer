@@ -1,6 +1,6 @@
 from PyQt6.QtWidgets import QDialog, QVBoxLayout, QLineEdit, QHBoxLayout, QLabel, QDialogButtonBox
-from queryService import QueryService
-from tableWidget import CustomTableWidget
+from services.query_service import QueryService
+from ui.table_widget import CustomTableWidget
 
 class CustomDialog(QDialog):
     def __init__(self, currentTable: CustomTableWidget, type, parent=None):
