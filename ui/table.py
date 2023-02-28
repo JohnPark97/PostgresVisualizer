@@ -1,6 +1,6 @@
 from PyQt6.QtWidgets import QTableView
 from customTableModel import *
-from services.queryService import QueryService
+from services.query_service import QueryService
 
 # NOT IN USE
 class CustomTable(QTableView):

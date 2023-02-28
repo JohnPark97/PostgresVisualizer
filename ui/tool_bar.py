@@ -1,7 +1,7 @@
 from PyQt6.QtWidgets import QToolBar, QInputDialog
 from PyQt6.QtGui import QAction
-from services.queryService import *
-from ui.customDialog import *
+from services.query_service import *
+from ui.custom_dialog import *
 
 ACTIONS = ['Add Row', 'Commit Changes']
 

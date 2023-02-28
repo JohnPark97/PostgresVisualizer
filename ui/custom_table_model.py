@@ -1,6 +1,6 @@
 
 from PyQt6.QtCore import Qt, QAbstractTableModel, QModelIndex
-from services.queryService import *
+from services.query_service import *
 
 # NOT IN USE
 class CustomTableModel(QAbstractTableModel):
