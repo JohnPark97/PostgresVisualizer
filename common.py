@@ -4,3 +4,6 @@ def removeSpecialCharacters(str):
 
 def comma_join(arr):
     return ','.join(arr)
+
+def specifier_join(arr):
+    return ', '.join([f'{i} = %s' for i in arr])
