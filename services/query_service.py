@@ -1,5 +1,5 @@
 from services.connection_service import ConnectionService
-from common import comma_join
+from common import comma_join, specifier_join
 
 class QueryService():
     def connection():
@@ -54,10 +54,25 @@ class QueryService():
 
         return inserted_id
 
-    def update():
-        pass
+    def update(table, columns, values, id_col, id_val):
+        conn = QueryService.connection()
+        # Create a cursor
+        cur = conn.cursor()
+
+        queryStatement = f"UPDATE {table} SET {specifier_join(columns)} WHERE {id_col} = %s"
+        values.append(id_val)
+        # Execute an update statement
+        cur.execute(queryStatement, tuple(values))
+
+        # Commit the changes
+        conn.commit()
+
+        # Close the cursor and connection
+        cur.close()
+        conn.close()
 
     def delete():
+        # TODO: Feb 27
         pass
 
 def generate_variable_marks(cols):

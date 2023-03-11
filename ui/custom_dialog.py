@@ -1,4 +1,5 @@
 from PyQt6.QtWidgets import QDialog, QVBoxLayout, QLineEdit, QHBoxLayout, QLabel, QDialogButtonBox
+from PyQt6.QtGui import QColor
 from services.query_service import QueryService
 from ui.table_widget import CustomTableWidget
 
@@ -10,6 +11,7 @@ class CustomDialog(QDialog):
         self.headers = self.currentTable.getHeaderNames()
 
         self.line_edits = []
+    
         if type == "Add Row":
             self.setWindowTitle(type)
 
@@ -40,6 +42,23 @@ class CustomDialog(QDialog):
 
             # Make the dialog visible
             self.exec()
+
+        elif type == "Update":
+            staged_changes = currentTable.get_staged_changes()
+            
+            if bool(staged_changes):
+                for row_index, row in staged_changes.items():
+                    columns = list(row.keys())
+                    values = list(row.values())
+                    id_col = columns[0]
+                    id = values[0]
+                    QueryService.update(self.current_table_name, columns[1:], values[1:], id_col, id)
+                currentTable.restore_table_color_to_white()
+                currentTable.clear_changed_rows_map()
+
+            else:
+                print('no items selected')
+
 
     def add_row_okay(self): 
         values_to_be_added = self.get_dialog_values()
